@@ -57,6 +57,11 @@ func main() {
 	// Added recover, logger middleware & swagger api docs at /docs
 	app.Use(logger.New(), swagger.New(swaggerConfig), recover.New())
 
+	// Test
+	app.Get("/ping", func(c *fiber.Ctx) error {
+		return c.SendString("pong")
+	})
+
 	// Register route handlers
 	app.Post("/rotate", Rotate)
 	app.Post("/resize", Resize)
